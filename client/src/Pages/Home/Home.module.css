@@ -29,3 +29,46 @@
   border: 2px solid;
   border-image: linear-gradient(rgb(83, 83, 83), rgb(182, 182, 182)) 0 1;
 }
+
+.vid {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 6rem;
+}
+
+.video {
+  width: 90%;
+  height: 400px;
+  background-color: #D09600;
+  border-radius: 20px;
+}
+
+.vid h1 {
+  width: 30%;
+  text-wrap: wrap;
+  font-family: var(--header-font);
+  font-size: 3rem;
+  text-align: center;
+}
+
+.vid span:nth-child(1) {
+  background: linear-gradient(97deg, #FFF -17.44%, #3b4d5a 80.8%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.vid span:nth-child(2) {
+  background: linear-gradient(97deg, #F3B391 -17.44%, #D04900 84.28%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.swiper {
+  /* width: 85%; */
+  padding: 2rem 4rem;
+}

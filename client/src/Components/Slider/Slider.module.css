@@ -1,0 +1,17 @@
+.slider {
+  text-align: center;
+  font-family: var(--header-font);
+  background: linear-gradient(180deg, #444343 0%, #8E8E8E 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+  font-size: 2.5rem;
+}
+
+.currentSlider {
+  background: linear-gradient(180deg, #D04900 0%, #F3B391 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

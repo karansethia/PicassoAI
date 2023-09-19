@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../../Components/Navbar/Navbar";
 import Hero from "../../Components/Hero/Hero";
 import classes from "./Home.module.css";
+import Slider from "../../Components/Slider/Slider";
 
 const Home = () => {
   return (
@@ -37,6 +38,17 @@ const Home = () => {
           </p>
         </div>
       </section>
+      <section className={classes.vid}>
+        <div className={classes.video}></div>
+        <h1>
+          Turn an <span className={classes.idea}>Idea</span> to{" "}
+          <span className={classes.reality}>reality</span> with few words and
+          clicks
+        </h1>
+      </section>
+      <div className={classes.swiper}>
+        <Slider />
+      </div>
     </div>
   );
 };
