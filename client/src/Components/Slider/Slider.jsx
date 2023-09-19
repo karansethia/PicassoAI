@@ -13,7 +13,7 @@ import {Autoplay} from "swiper/modules";
 const Slider = () => {
   return (
     <Swiper
-      spaceBetween={40}
+      spaceBetween={10}
       slidesPerView={3}
       autoplay={{
         delay: 2500,

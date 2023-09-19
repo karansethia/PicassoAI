@@ -1,0 +1,53 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 3rem 6rem;
+  align-items: center;
+  gap: 3rem;
+  background: linear-gradient(180deg, #04080F 0%, #002642 100%);
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo img:nth-child(1) {
+  width: 10rem;
+  height: fit-content;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  margin-top: 1rem;
+}
+
+.links a {
+  text-decoration: none;
+  font-family: var(--content-font);
+  color: #fff;
+  font-size: 1rem;
+  letter-spacing: 1px;
+}
+
+.form p {
+  font-family: var(--content-font);
+  color: #fff;
+  font-size: 1rem;
+  /* letter-spacing: 1px; */
+}
+
+.form input {
+  font-family: var(--content-font);
+  font-size: 0.8rem;
+  padding: 8px 10px;
+  width: 100%;
+  border-radius: 8px;
+}
+
+input:focus {
+  outline: none;
+}

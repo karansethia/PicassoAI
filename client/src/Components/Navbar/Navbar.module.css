@@ -4,10 +4,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 3rem;
+  padding: 1.5rem 3rem;
   font-family: var(--content-font);
   font-size: 1.2rem;
   font-weight: 500;
+  position: sticky;
+  top: 0;
+  z-index: 100000;
+  background-color: #04080fa6;
 }
 
 .container img {
@@ -31,10 +35,10 @@
 
 .nav_links button {
   color: #fff;
-  letter-spacing: 0.1rem;
-  font-weight: 500;
+  letter-spacing: 1px;
+  font-weight: 600;
   margin: 2px;
-  padding: 6px 24px;
+  padding: 8px 32px;
   border: none;
   border-radius: 6px;
   font-size: 1rem;

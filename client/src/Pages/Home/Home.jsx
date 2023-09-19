@@ -3,6 +3,7 @@ import Navbar from "../../Components/Navbar/Navbar";
 import Hero from "../../Components/Hero/Hero";
 import classes from "./Home.module.css";
 import Slider from "../../Components/Slider/Slider";
+import Footer from "../../Components/Footer/Footer";
 
 const Home = () => {
   return (
@@ -46,9 +47,18 @@ const Home = () => {
           clicks
         </h1>
       </section>
-      <div className={classes.swiper}>
+      <section className={classes.swiper}>
         <Slider />
-      </div>
+        <div className={classes.overlay}></div>
+      </section>
+      <section className={classes.comm}>
+        <h1>
+          Be part of our <br />
+          Creative Community
+        </h1>
+        <div className={classes.blur}></div>
+      </section>
+      <Footer />
     </div>
   );
 };
