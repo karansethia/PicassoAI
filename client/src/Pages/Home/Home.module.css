@@ -1,0 +1,31 @@
+.info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-align: center;
+  font-family: var(--content-font);
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+
+.info div {
+  padding: 0rem 2rem;
+}
+
+.info h3 {
+  background: linear-gradient(90deg, #DC5D18 -7.03%, #D09600 116.02%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 1.5rem;
+}
+
+.info p {
+  padding: 0 3rem;
+}
+
+.info div:nth-child(2) {
+  border: 2px solid;
+  border-image: linear-gradient(rgb(83, 83, 83), rgb(182, 182, 182)) 0 1;
+}

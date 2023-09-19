@@ -1,0 +1,99 @@
+.container {
+  background: url('../../assets/herobg.svg') no-repeat bottom;
+  background-size: contain;
+  height: 91vh;
+  display: flex;
+  justify-content: start;
+  /* width: 100%; */
+  padding: 1rem 0 0 4rem;
+}
+
+.content {
+  z-index: 10;
+  width: 49%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 8rem;
+  color: #fff;
+  /* margin-right: -40rem; */
+}
+
+.content h1 {
+  font-family: var(--header-font);
+  font-size: 3rem;
+  margin: 0;
+}
+
+.content span {
+  background: linear-gradient(95deg, #D04900 16.35%, #F3B391 38.43%, #0082E1 92.93%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.content p {
+  font-family: var(--content-font);
+  padding: 0.1px 10rem 0 0;
+}
+
+.content button {
+  position: relative;
+  background-image: linear-gradient(89deg, #002642 -12.45%, #D04900 137.17%);
+  border-radius: 10px;
+  border: none;
+  margin-top: 2rem;
+  padding: 0.5rem 2rem;
+  width: fit-content;
+  cursor: pointer;
+  z-index: 1;
+  color: #fff;
+}
+
+.content button::after {
+  position: absolute;
+  content: '';
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: linear-gradient(90deg, #D04900 -49.44%, #002642 99.81%, #002642 99.81%);
+  z-index: -1;
+  transition: all 1s ease-in;
+  opacity: 0;
+  border-radius: 10px;
+}
+
+.content button:hover::after {
+  opacity: 1;
+}
+
+
+.images {
+  display: flex;
+  align-items: end;
+  width: 40%;
+  margin-left: -8rem;
+}
+
+.images img:nth-child(1) {
+  z-index: 2;
+  margin-left: -5rem;
+  margin-right: 5rem;
+  width: 20rem;
+  height: fit-content;
+}
+
+.images img:nth-child(2) {
+  /* margin-right: -6rem; */
+  margin-left: -14rem;
+  width: 25rem;
+  height: fit-content;
+}
+
+.images img:nth-child(3) {
+  /* display: none; */
+  position: absolute;
+  margin-left: 21.4rem;
+  width: 30rem;
+  height: fit-content;
+}
