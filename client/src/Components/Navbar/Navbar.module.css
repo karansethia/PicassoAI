@@ -31,6 +31,7 @@
   list-style: none;
   margin: 2px;
   gap: 2rem;
+
 }
 
 .nav_links button {
@@ -44,4 +45,9 @@
   font-size: 1rem;
   cursor: pointer;
   background: linear-gradient(90deg, #D04900 -49.44%, #002642 99.81%, #002642 99.81%);
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
 }

@@ -44,6 +44,8 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  background-color: #1e1e1e;
+  border-radius: 20px;
 }
 
 .prompt_container textarea {

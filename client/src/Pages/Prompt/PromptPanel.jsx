@@ -21,7 +21,7 @@ const PromptPanel = () => {
                 flexDirection: "row",
                 justifyContent: "space-between",
                 alignItems: "center",
-                marginTop: "1rem",
+                marginTop: "1.5rem",
               }}
             >
               <label htmlFor="prompt">Number of images</label>
@@ -37,7 +37,7 @@ const PromptPanel = () => {
                 flexDirection: "row",
                 justifyContent: "space-between",
                 alignItems: "center",
-                marginTop: "1rem",
+                marginTop: "1.5rem",
               }}
             >
               <label htmlFor="prompt">Size of Image</label>

@@ -16,7 +16,7 @@ const Slider = () => {
       spaceBetween={10}
       slidesPerView={3}
       autoplay={{
-        delay: 2500,
+        delay: 2000,
         disableOnInteraction: false,
       }}
       modules={[Autoplay]}
@@ -124,6 +124,19 @@ const Slider = () => {
             }
           >
             Graphic Design
+          </div>
+        )}
+      </SwiperSlide>
+      <SwiperSlide>
+        {({isNext}) => (
+          <div
+            className={
+              isNext
+                ? `${classes.slider} ${classes.currentSlider}`
+                : `${classes.slider}`
+            }
+          >
+            Interior Design
           </div>
         )}
       </SwiperSlide>
