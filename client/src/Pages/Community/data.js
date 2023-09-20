@@ -1,0 +1,18 @@
+import img1 from '../../assets/aiimages/1.png'
+import img2 from '../../assets/aiimages/2.png'
+import img3 from '../../assets/aiimages/3.jpg'
+import img4 from '../../assets/aiimages/4.jpg'
+import img5 from '../../assets/aiimages/5.png'
+import img6 from '../../assets/aiimages/6.jpg'
+import img7 from '../../assets/aiimages/7.jpg'
+import img8 from '../../assets/aiimages/8.jpg'
+import img9 from '../../assets/aiimages/9.jpg'
+import img10 from '../../assets/aiimages/10.png'
+import img11 from '../../assets/aiimages/11.png'
+import img12 from '../../assets/aiimages/12.jpg'
+import img13 from '../../assets/aiimages/13.jpg'
+import img14 from '../../assets/aiimages/14.jpg'
+import img15 from '../../assets/aiimages/15.jpg'
+import img16 from '../../assets/aiimages/16.jpg'
+
+export {img1,img2,img3,img4,img5,img6,img7,img8,img9,img10,img11,img12,img13,img14, img15,img16}
