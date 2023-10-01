@@ -11,7 +11,7 @@ const Pricing = () => {
         <div className={`${classes.pricingCard} ${classes.basic}`}>
           <div className={classes.heading}>
             <h4>BASIC</h4>
-            <p>for small websites or blogs</p>
+            <p>for everyday creativity</p>
           </div>
           <p className={classes.price}>
             $5
@@ -40,7 +40,7 @@ const Pricing = () => {
         <div className={`${classes.pricingCard} ${classes.standard}`}>
           <div className={classes.heading}>
             <h4>STANDARD</h4>
-            <p>for medium-sized businesses</p>
+            <p>for illustration level art</p>
           </div>
           <p className={classes.price}>
             $10

@@ -26,6 +26,7 @@
   box-shadow: 0 0 32px transparent;
   text-align: center;
   height: 35rem;
+  transition: all 1s ease-in;
 }
 
 ul {
@@ -47,10 +48,14 @@ ul {
 
 .pricingCard:hover {
   border-color: var(--col);
-  background-color: #26262680;
+  /* background-color: #26262680; */
   box-shadow: 0 0 32px #171717;
   transform: translateY(-16px) scale(1.02);
   transition: all 0.5s ease;
+  background: url('../../assets/prbg.png');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 

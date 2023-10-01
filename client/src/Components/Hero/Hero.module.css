@@ -22,6 +22,8 @@
   font-family: var(--header-font);
   font-size: 3rem;
   margin: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
 
 .content span {
