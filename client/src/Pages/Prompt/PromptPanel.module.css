@@ -9,15 +9,19 @@
 
 .images_container {
   width: 60%;
+  /* height: 20%; */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-.images_container img {
-  width: 50rem;
-  height: fit-content;
+.images_container div:nth-child(1) {
+  background: url('../../assets/p1.png');
+  width: 45rem;
+  height: 25rem;
   border-radius: 20px;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .variant_container {
@@ -77,4 +81,12 @@ select:focus {
   color: #FFF;
   padding: 8px 32px;
   background: linear-gradient(90deg, #D04900 -49.44%, #002642 99.81%, #002642 99.81%);
+}
+
+.sliderBtnContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 0.8rem;
+  font-family: var(--content-font);
 }

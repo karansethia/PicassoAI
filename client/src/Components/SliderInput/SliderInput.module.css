@@ -1,0 +1,12 @@
+.slider {
+  font-size: 0.3rem;
+}
+
+.sliderBtn {
+  background: #742800ac !important;
+  transition: all 1s ease;
+}
+
+.active {
+  background: #002642 !important;
+}
