@@ -1,17 +1,21 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
-const connectDB = require('./db/connect')
-const userRoutes = require('./routes/user-operations')
+const connectDB = require('./db/mongo')
+const userRoutes = require('./routes/user-operations');
+const authRoutes = require('./routes/auth')
 
 const app = express();
 
 // setting up cors for cross origin connection
 app.use(cors({
   origin: '*'
-}))
+}));
+
+app.use(express.json())
 
 //routes
+app.use('/api/v1', authRoutes);
 app.use('/api/v1', userRoutes);
 
 const port = process.env.PORT || 3000;
