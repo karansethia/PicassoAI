@@ -2,6 +2,10 @@ const { cloudinary } = require("../db/cloudinary");
 const asyncWrapper = require("../middleware/async");
 const Image = require('../models/image');
 const User = require("../models/user");
+require('dotenv').config()
+const OpenAI = require('openai');
+// const { Configuration, OpenAIApi } = require('openai');
+// import {Configuration, OpenAIApi} from 'openai'
 
 const getUserImages = asyncWrapper(async(req,res) => {
   //todo get userid and get user details 
@@ -33,7 +37,13 @@ const getCommunityImages = asyncWrapper(async(req,res)=>{
 
 const postGenerateImage = asyncWrapper(async(req,res)=>{
   // sent axios req to openAI, get images
-  res.status(200).json({message: "image sent to openai"})
+  const openai = new OpenAI();
+  const openAIRes = await openai.images.generate({
+    prompt: req.body.prompt_details,
+    n: req.body.num,
+    size: "1024x1024"
+  })
+  res.status(200).json({openAIResponse: openAIRes})
 })
 
 const postSaveImage =asyncWrapper(async(req,res)=>{
