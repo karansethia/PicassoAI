@@ -12,13 +12,13 @@ const imageSchema = new mongoose.Schema({
   },
   visibility: {
     type: String,
-    required: true
+    default: 'private'
   },
   prompt_details: {
     type: String,
     required: true
   },
-  cludinary_id:{
+  cloudinary_id:{
     type: String,
     required: true
   }
