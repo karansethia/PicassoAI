@@ -5,24 +5,30 @@ const User = require("../models/user");
 
 const getUserImages = asyncWrapper(async(req,res) => {
   //todo get userid and get user details 
-  const images = [];
-  const {generatedImages} = User.findById(req.params.id);
-  generatedImages.forEach(imageId => {
-    let image = Image.findById(imageId);
-    images.push(image)
-  });
-  res.status(200).json({images: images})
+  const userImages = [];
+  const {generatedImages} = await User.findById(req.params.id);
+  const promises = generatedImages.map((imageId) => {
+  return Image.findById(imageId)
+    .then(image => {
+      userImages.push(image);
+    });
+});
+  Promise.all(promises)
+  .then(() => {
+    console.log(userImages);
+    res.status(200).json({ images: userImages });
+  })
 });
 
 const getUserInfo = asyncWrapper(async(req,res) => {
   const userRes = await User.findById(req.params.id);
-  res.json({details: userRes});
+  res.json({useDetails: userRes});
 })
 
 const getCommunityImages = asyncWrapper(async(req,res)=>{
   //get all the images that have visibility = public
-  
-  res.status(200).json({message: "Community images here"})
+  const imageRes = await Image.find({visibility: 'public'});
+  res.status(200).json({images: imageRes})
 })
 
 const postGenerateImage = asyncWrapper(async(req,res)=>{
