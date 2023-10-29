@@ -8,7 +8,6 @@ import Footer from "../../Components/Footer/Footer";
 const Home = () => {
   return (
     <div>
-      <Navbar />
       <Hero />
       <section className={classes.info}>
         <div>
@@ -58,7 +57,6 @@ const Home = () => {
         </h1>
         <div className={classes.blur}></div>
       </section>
-      <Footer />
     </div>
   );
 };

@@ -4,8 +4,7 @@ const Image = require('../models/image');
 const User = require("../models/user");
 require('dotenv').config()
 const OpenAI = require('openai');
-// const { Configuration, OpenAIApi } = require('openai');
-// import {Configuration, OpenAIApi} from 'openai'
+
 
 const getUserImages = asyncWrapper(async(req,res) => {
   //todo get userid and get user details 
@@ -32,6 +31,7 @@ const getUserInfo = asyncWrapper(async(req,res) => {
 const getCommunityImages = asyncWrapper(async(req,res)=>{
   //get all the images that have visibility = public
   const imageRes = await Image.find({visibility: 'public'});
+  console.log(imageRes);
   res.status(200).json({images: imageRes})
 })
 

@@ -7,7 +7,7 @@ router.get('/community', getCommunityImages);
 router.post('/:id/generate',postGenerateImage);
 router.post('/:id/save',postSaveImage);
 router.patch('/:id/share',postShareImage);
-router.get('/:id/dashboard',getUserInfo);
+router.get('/:id/user',getUserInfo);
 router.get('/:id/generatedImages',getUserImages)
 
 

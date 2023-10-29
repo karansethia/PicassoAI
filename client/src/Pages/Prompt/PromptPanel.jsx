@@ -101,14 +101,29 @@ const PromptPanel = () => {
 
     return {filter: filters.join(" ")};
   }
+  let data;
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+
+    const prompt_details = {
+      prompt: formData.get("prompt"),
+      num: formData.get("num"),
+      size: formData.get("size"),
+    };
+    console.log(prompt_details);
+  };
   return (
     <div>
-      <Navbar />
       <div className={classes.container}>
         <div className={classes.prompt_container}>
-          <form action="">
+          <form onSubmit={onSubmitHandler}>
             <label htmlFor="prompt">Prompt</label>
-            <textarea type="text" placeholder="A castle in the night sky" />
+            <textarea
+              type="text"
+              placeholder="A castle in the night sky"
+              name="prompt"
+            />
             <div
               style={{
                 display: "flex",
@@ -119,7 +134,7 @@ const PromptPanel = () => {
               }}
             >
               <label htmlFor="prompt">Number of images</label>
-              <select name="" id="">
+              <select name="num" id="">
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -135,7 +150,7 @@ const PromptPanel = () => {
               }}
             >
               <label htmlFor="prompt">Size of Image</label>
-              <select name="" id="">
+              <select name="size" id="">
                 <option>Choose</option>
                 <option>1024*1024</option>
                 <option>512*512</option>
@@ -151,8 +166,8 @@ const PromptPanel = () => {
                 marginTop: "1.5rem",
               }}
             >
-              <button>Generate</button>
-              <button>Create variations</button>
+              <button type="submit">Generate</button>
+              <button onClick={() => {}}>Create variations</button>
             </div>
           </form>
           <div>
@@ -186,7 +201,6 @@ const PromptPanel = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

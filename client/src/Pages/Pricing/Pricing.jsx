@@ -6,7 +6,6 @@ import Navbar from "../../Components/Navbar/Navbar";
 const Pricing = () => {
   return (
     <div className={classes.container}>
-      <Navbar />
       <section className={classes.pricingPlans}>
         <div className={`${classes.pricingCard} ${classes.basic}`}>
           <div className={classes.heading}>

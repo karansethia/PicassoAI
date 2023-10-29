@@ -25,7 +25,6 @@ import {
 const UserDash = () => {
   return (
     <div className={classes.container}>
-      <Navbar />
       <h1 className={classes.name}>Karan</h1>
       <div className={classes.content}>
         <div className={classes.sideBar}>

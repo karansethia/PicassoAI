@@ -6,13 +6,38 @@ import Community from "./Pages/Community/Community";
 import PromptPanel from "./Pages/Prompt/PromptPanel";
 import UserDash from "./Pages/User/UserDash";
 import Pricing from "./Pages/Pricing/Pricing";
+import Signin from "./Pages/Signin/Signin";
+import RootLayout from "./Components/RootLayout";
 
+// const router = createBrowserRouter([
+//   {path: "/", element: <Home />},
+//   {path: "/community", element: <Community />},
+//   {path: "/generate/:id", element: <PromptPanel />},
+//   {path: "/user/:id", element: <UserDash />},
+//   {path: "/pricing", element: <Pricing />},
+//   {path: "/signin", element: <Signin />},
+// ]);
 const router = createBrowserRouter([
-  {path: "/", element: <Home />},
-  {path: "/community", element: <Community />},
-  {path: "/generate", element: <PromptPanel />},
-  {path: "/user/:userId", element: <UserDash />},
-  {path: "/pricing", element: <Pricing />},
+  {
+    path: "/",
+    element: <RootLayout />,
+    children: [
+      {index: true, element: <Home />},
+      {path: "/community", element: <Community />},
+      {path: "/pricing", element: <Pricing />},
+      {path: "/signin", element: <Signin />},
+      {
+        path: "/generate/:id",
+        element: <PromptPanel />,
+        // loader: () => {}
+      },
+      {
+        path: "/user/:id",
+        element: <PromptPanel />,
+        // loader: () => {}
+      },
+    ],
+  },
 ]);
 
 const App = () => {

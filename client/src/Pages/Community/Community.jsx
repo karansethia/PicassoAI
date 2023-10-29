@@ -25,7 +25,6 @@ import ImgGrid from "../../Components/ImgGrid/ImgGrid";
 const Community = () => {
   return (
     <div className={classes.container}>
-      <Navbar />
       <h1>
         Explore creative minds <br />
         in our community
@@ -52,7 +51,6 @@ const Community = () => {
           ]}
         />
       </div>
-      <Footer />
     </div>
   );
 };
