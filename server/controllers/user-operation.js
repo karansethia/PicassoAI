@@ -24,8 +24,8 @@ const getUserImages = asyncWrapper(async(req,res) => {
 });
 
 const getUserInfo = asyncWrapper(async(req,res) => {
-  const userRes = await User.findById(req.params.id);
-  res.json({useDetails: userRes});
+  const userDetails = await User.findById(req.params.id);
+  res.json({id: userDetails._id, username: userDetails.username});
 })
 
 const getCommunityImages = asyncWrapper(async(req,res)=>{

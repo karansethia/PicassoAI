@@ -79,11 +79,10 @@ export const postSaveImage = async({id,imageDetails}) => {
 
 
 //* PATCH request to make the generated image public
-export const patchShareImage = async({id,imageDetails}) => {
+export const patchShareImage = async({id}) => {
   const url = `http://localhost:3000/api/v1/${id}/share`;
   const response = await fetch(url,{
     method: 'PATCH',
-    body: JSON.stringify(imageDetails),
     headers: {
       "Content-Type": 'application/json'
     }

@@ -1,7 +1,6 @@
 import React from "react";
 import classes from "./Pricing.module.css";
 import Check from "./Check";
-import Navbar from "../../Components/Navbar/Navbar";
 
 const Pricing = () => {
   return (

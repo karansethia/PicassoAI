@@ -16,12 +16,11 @@
 }
 
 .images_container div:nth-child(1) {
-  background: url('../../assets/p1.png');
-  width: 45rem;
-  height: 25rem;
-  border-radius: 20px;
-  background-size: cover;
-  background-repeat: no-repeat;
+  width: 45rem !important;
+  height: 25rem !important;
+  border-radius: 20px !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
 }
 
 .variant_container {
@@ -35,6 +34,7 @@
   height: fit-content;
   padding: 1rem 0rem;
   border-radius: 1rem;
+  cursor: pointer;
 }
 
 .prompt_container {
@@ -74,7 +74,8 @@ select:focus {
   padding: 5px 5px 5px 9px;
 }
 
-.prompt_container button {
+.prompt_container button,
+.actionBtnContainer button {
   font-size: 1.3rem;
   border: none;
   border-radius: 10px;
@@ -89,4 +90,17 @@ select:focus {
   gap: 10px;
   font-size: 0.8rem;
   font-family: var(--content-font);
+}
+
+.actionBtnContainer {
+  display: flex;
+  width: 100%;
+  justify-content: end;
+  height: 10rem;
+  align-items: center;
+}
+
+.actionBtnContainer button {
+  margin: 1rem;
+  padding: 10px 40px;
 }

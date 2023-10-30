@@ -1,28 +1,18 @@
 import React from "react";
-import Navbar from "../../Components/Navbar/Navbar";
-import {
-  img1,
-  img2,
-  img3,
-  img4,
-  img5,
-  img6,
-  img7,
-  img8,
-  img9,
-  img10,
-  img11,
-  img12,
-  img13,
-  img14,
-  img15,
-  img16,
-} from "./data";
 import classes from "./Community.module.css";
-import Footer from "../../Components/Footer/Footer";
 import ImgGrid from "../../Components/ImgGrid/ImgGrid";
-
+import {getCommunityPosts} from "../../utils/http";
+import {useQuery} from "@tanstack/react-query";
 const Community = () => {
+  const {data, isPending, isError, error} = useQuery({
+    queryKey: ["Community"],
+    queryFn: ({signal}) => getCommunityPosts({signal}),
+    staleTime: 120000,
+  });
+  let images = [];
+  if (!isPending) {
+    data.images.map((image) => images.push(image));
+  }
   return (
     <div className={classes.container}>
       <h1>
@@ -30,26 +20,7 @@ const Community = () => {
         in our community
       </h1>
       <div className={classes.imggrid}>
-        <ImgGrid
-          images={[
-            img1,
-            img2,
-            img3,
-            img4,
-            img5,
-            img6,
-            img7,
-            img8,
-            img9,
-            img10,
-            img11,
-            img12,
-            img13,
-            img14,
-            img15,
-            img16,
-          ]}
-        />
+        {!isPending && <ImgGrid images={images} />}
       </div>
     </div>
   );

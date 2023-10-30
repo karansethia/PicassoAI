@@ -1,12 +1,17 @@
-import React, {useState} from "react";
-import Navbar from "../../Components/Navbar/Navbar";
+import React, {useState, useRef} from "react";
 import p1 from "../../assets/p1.png";
 import p2 from "../../assets/p2.png";
 import p3 from "../../assets/p3.png";
+import {useMutation} from "@tanstack/react-query";
 import classes from "./PromptPanel.module.css";
-import Footer from "../../Components/Footer/Footer";
 import ImgSlider from "../../Components/ImgSlider/ImgSlider";
 import SliderInput from "../../Components/SliderInput/SliderInput";
+import {
+  patchShareImage,
+  postGenerateImage,
+  postSaveImage,
+} from "../../utils/http";
+import {useParams, useNavigate} from "react-router-dom";
 const DEFAULT_OPTIONS = [
   {
     name: "Brightness",
@@ -81,9 +86,12 @@ const DEFAULT_OPTIONS = [
 ];
 
 const PromptPanel = () => {
+  const params = useParams();
+  const navigate = useNavigate();
   const [selectedOptionIndex, setSelectedOptionIndex] = useState(0);
   const [options, setOptions] = useState(DEFAULT_OPTIONS);
   const selectedOption = options[selectedOptionIndex];
+  const promptRef = useRef();
 
   function handleSliderChange({target}) {
     setOptions((prevOptions) => {
@@ -94,14 +102,27 @@ const PromptPanel = () => {
     });
   }
 
-  function getImageStyle() {
-    const filters = options.map((option) => {
-      return `${option.property}(${option.value}${option.unit})`;
-    });
+  // function getImageStyle() {
+  //   const filters = options.map((option) => {
+  //     return `${option.property}(${option.value}${option.unit})`;
+  //   });
 
-    return {filter: filters.join(" ")};
-  }
-  let data;
+  //   return {filter: filters.join(" ")};
+  // }
+
+  const [currentImage, setCurrentImage] = useState(p1);
+  const {data, mutate, isLoading, error, isError} = useMutation({
+    mutationFn: postGenerateImage,
+  });
+  const {mutate: saveMutate} = useMutation({
+    mutationFn: postSaveImage,
+    onSuccess: () => {
+      navigate(`/user/${params.id}`);
+    },
+  });
+  const {mutate: shareMutate} = useMutation({
+    mutationFn: patchShareImage,
+  });
   const onSubmitHandler = (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -111,7 +132,21 @@ const PromptPanel = () => {
       num: formData.get("num"),
       size: formData.get("size"),
     };
+    mutate({id: params.id, prompt: prompt_details});
     console.log(prompt_details);
+  };
+
+  const onSaveHandler = (e) => {
+    e.preventDefault();
+    const imageDetails = {
+      imageUrl: currentImage,
+      prompt_details: promptRef,
+    };
+    saveMutate({id: params.id, imageDetails});
+  };
+  const onShareHandler = (e) => {
+    e.preventDefault();
+    shareMutate({id: params.id});
   };
   return (
     <div>
@@ -123,6 +158,7 @@ const PromptPanel = () => {
               type="text"
               placeholder="A castle in the night sky"
               name="prompt"
+              ref={promptRef}
             />
             <div
               style={{
@@ -150,7 +186,7 @@ const PromptPanel = () => {
               }}
             >
               <label htmlFor="prompt">Size of Image</label>
-              <select name="size" id="">
+              <select name="size" id="" defaultValue={"1024*1024"}>
                 <option>Choose</option>
                 <option>1024*1024</option>
                 <option>512*512</option>
@@ -193,11 +229,42 @@ const PromptPanel = () => {
           </div>
         </div>
         <div className={classes.images_container}>
-          <div className={classes.mainImage} style={getImageStyle()}></div>
+          <div
+            className={classes.mainImage}
+            style={{
+              background: `url(${currentImage})`,
+            }}
+          ></div>
           <div className={classes.variant_container}>
-            <img src={p1} alt="" />
-            <img src={p2} alt="" />
-            <img src={p3} alt="" />
+            <img
+              src={p1}
+              alt=""
+              onClick={() => {
+                setCurrentImage(p1);
+              }}
+            />
+            <img
+              src={p2}
+              alt=""
+              onClick={() => {
+                setCurrentImage(p2);
+              }}
+            />
+            <img
+              src={p3}
+              alt=""
+              onClick={() => {
+                setCurrentImage(p3);
+              }}
+            />
+          </div>
+          <div className={classes.actionBtnContainer}>
+            <button type="submit" onClick={onSaveHandler}>
+              Save
+            </button>
+            <button type="submit" onClick={onShareHandler}>
+              Share
+            </button>
           </div>
         </div>
       </div>

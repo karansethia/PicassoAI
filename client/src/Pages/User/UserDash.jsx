@@ -1,35 +1,27 @@
 import React from "react";
-import Navbar from "../../Components/Navbar/Navbar";
 import classes from "./UserDash.module.css";
-import {Link} from "react-router-dom";
+import {Link, useLoaderData, useParams} from "react-router-dom";
 import ImgGrid from "../../Components/ImgGrid/ImgGrid";
-import {
-  img1,
-  img2,
-  img3,
-  img4,
-  img5,
-  img6,
-  img7,
-  img8,
-  img9,
-  img10,
-  img11,
-  img12,
-  img13,
-  img14,
-  img15,
-  img16,
-} from "../Community/data";
-
+import {useQuery} from "@tanstack/react-query";
+import {getUserDetails, getUserImage, queryClient} from "../../utils/http";
 const UserDash = () => {
+  const UserData = useLoaderData();
+  const params = useParams();
+  const {data, isPending, isError, error} = useQuery({
+    queryKey: ["userImage", params.id],
+    queryFn: ({signal}) => getUserImage({signal, id: params.id}),
+  });
+  let images = [];
+  if (!isPending) {
+    data.images.map((image) => images.push(image));
+  }
   return (
     <div className={classes.container}>
-      <h1 className={classes.name}>Karan</h1>
+      <h1 className={classes.name}>{UserData?.username}</h1>
       <div className={classes.content}>
         <div className={classes.sideBar}>
           <p>Got Something on your mind?</p>
-          <Link to="/generate" className={classes.router}>
+          <Link to={`/generate/${params.id}`} className={classes.router}>
             Go to Canvas
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -85,26 +77,7 @@ const UserDash = () => {
           </div>
         </div>
         <div className={classes.imggrid}>
-          <ImgGrid
-            images={[
-              img1,
-              img2,
-              img3,
-              img4,
-              img5,
-              img6,
-              img7,
-              img8,
-              img9,
-              img10,
-              img11,
-              img12,
-              img13,
-              img14,
-              img15,
-              img16,
-            ]}
-          />
+          {!isPending && <ImgGrid images={images} />}
         </div>
       </div>
     </div>
@@ -112,3 +85,11 @@ const UserDash = () => {
 };
 
 export default UserDash;
+
+export const loader = async ({params}) => {
+  return queryClient.fetchQuery({
+    queryKey: ["user", params.id],
+    queryFn: ({signal}) => getUserDetails({signal, id: params.id}),
+    staleTime: 600000,
+  });
+};
