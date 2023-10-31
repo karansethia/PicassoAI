@@ -2,10 +2,7 @@ import React, {useState, useRef} from "react";
 import p1 from "../../assets/p1.png";
 import p2 from "../../assets/p2.png";
 import p3 from "../../assets/p3.png";
-import {useMutation} from "@tanstack/react-query";
 import classes from "./PromptPanel.module.css";
-import ImgSlider from "../../Components/ImgSlider/ImgSlider";
-import SliderInput from "../../Components/SliderInput/SliderInput";
 import {
   patchShareImage,
   postGenerateImage,
@@ -87,67 +84,78 @@ const DEFAULT_OPTIONS = [
 
 const PromptPanel = () => {
   const params = useParams();
-  const navigate = useNavigate();
-  const [selectedOptionIndex, setSelectedOptionIndex] = useState(0);
-  const [options, setOptions] = useState(DEFAULT_OPTIONS);
-  const selectedOption = options[selectedOptionIndex];
+  const [isLoading, setIsLoading] = useState(true);
+  const [fetchedData, setFetchedData] = useState(null);
   const promptRef = useRef();
 
-  function handleSliderChange({target}) {
-    setOptions((prevOptions) => {
-      return prevOptions.map((option, index) => {
-        if (index !== selectedOptionIndex) return option;
-        return {...option, value: target.value};
-      });
-    });
-  }
-
-  // function getImageStyle() {
-  //   const filters = options.map((option) => {
-  //     return `${option.property}(${option.value}${option.unit})`;
-  //   });
-
-  //   return {filter: filters.join(" ")};
-  // }
-
   const [currentImage, setCurrentImage] = useState(p1);
-  const {data, mutate, isLoading, error, isError} = useMutation({
-    mutationFn: postGenerateImage,
-  });
-  const {mutate: saveMutate} = useMutation({
-    mutationFn: postSaveImage,
-    onSuccess: () => {
-      navigate(`/user/${params.id}`);
-    },
-  });
-  const {mutate: shareMutate} = useMutation({
-    mutationFn: patchShareImage,
-  });
   const onSubmitHandler = (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
 
-    const prompt_details = {
-      prompt: formData.get("prompt"),
-      num: formData.get("num"),
+    const prompt = {
+      prompt_details: formData.get("prompt"),
+      num: +formData.get("num"),
       size: formData.get("size"),
     };
-    mutate({id: params.id, prompt: prompt_details});
-    console.log(prompt_details);
+    console.log(prompt);
+    try {
+      const response = postGenerateImage({id: params.id, prompt}).then(
+        (data) => {
+          console.log(data);
+          const {openAIResponse} = data;
+          console.log(openAIResponse);
+          setCurrentImage(openAIResponse.data[0].url);
+          setFetchedData(openAIResponse.data);
+          setIsLoading(false);
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const onSaveHandler = (e) => {
     e.preventDefault();
     const imageDetails = {
       imageUrl: currentImage,
-      prompt_details: promptRef,
+      prompt_details: promptRef.current.value,
     };
-    saveMutate({id: params.id, imageDetails});
+    try {
+      const response = postSaveImage({id: params.id, imageDetails}).then(
+        (res) => {
+          console.log(res);
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
   };
   const onShareHandler = (e) => {
     e.preventDefault();
-    shareMutate({id: params.id});
+    try {
+      const response = patchShareImage({
+        id: params.id,
+        imageVisibility: "public",
+      }).then((res) => {
+        console.log(res);
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
+  // const onSaveHandler = (e) => {
+  //   e.preventDefault();
+  //   const imageDetails = {
+  //     imageUrl: currentImage,
+  //     prompt_details: promptRef,
+  //   };
+  //   saveImage({id: params.id, imageDetails});
+  // };
+  // const onShareHandler = (e) => {
+  //   e.preventDefault();
+  //   shareImage({id: params.id});
+  // };
   return (
     <div>
       <div className={classes.container}>
@@ -186,11 +194,11 @@ const PromptPanel = () => {
               }}
             >
               <label htmlFor="prompt">Size of Image</label>
-              <select name="size" id="" defaultValue={"1024*1024"}>
+              <select name="size" id="" defaultValue={"1024x1024"}>
                 <option>Choose</option>
-                <option>1024*1024</option>
-                <option>512*512</option>
-                <option>256*256</option>
+                <option>1024x1024</option>
+                <option>512x512</option>
+                <option>256x256</option>
               </select>
             </div>
             <div
@@ -206,57 +214,26 @@ const PromptPanel = () => {
               <button onClick={() => {}}>Create variations</button>
             </div>
           </form>
-          <div>
-            <p style={{marginTop: "4rem"}}>Edit Image</p>
-            <div className={classes.sliderBtnContainer}>
-              {options.map((option, index) => {
-                return (
-                  <SliderInput
-                    key={index}
-                    name={option.name}
-                    active={index === selectedOptionIndex}
-                    handleClick={() => setSelectedOptionIndex(index)}
-                  />
-                );
-              })}
-            </div>
-            <ImgSlider
-              min={selectedOption.range.min}
-              max={selectedOption.range.max}
-              value={selectedOption.value}
-              handleChange={handleSliderChange}
-            />
-          </div>
         </div>
-        <div className={classes.images_container}>
-          <div
-            className={classes.mainImage}
-            style={{
-              background: `url(${currentImage})`,
-            }}
-          ></div>
-          <div className={classes.variant_container}>
-            <img
-              src={p1}
-              alt=""
-              onClick={() => {
-                setCurrentImage(p1);
-              }}
-            />
-            <img
-              src={p2}
-              alt=""
-              onClick={() => {
-                setCurrentImage(p2);
-              }}
-            />
-            <img
-              src={p3}
-              alt=""
-              onClick={() => {
-                setCurrentImage(p3);
-              }}
-            />
+        <div className={classes.result_container}>
+          <div className={classes.image_container}>
+            <div className={classes.mainImage}>
+              <img src={currentImage} alt="" />
+            </div>
+            <div className={classes.variant_container}>
+              {!isLoading &&
+                fetchedData &&
+                fetchedData.map((image, index) => (
+                  <img
+                    key={index}
+                    src={image.url}
+                    alt=""
+                    onClick={() => {
+                      setCurrentImage(image.url);
+                    }}
+                  />
+                ))}
+            </div>
           </div>
           <div className={classes.actionBtnContainer}>
             <button type="submit" onClick={onSaveHandler}>

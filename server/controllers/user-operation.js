@@ -38,10 +38,11 @@ const getCommunityImages = asyncWrapper(async(req,res)=>{
 const postGenerateImage = asyncWrapper(async(req,res)=>{
   // sent axios req to openAI, get images
   const openai = new OpenAI();
+  console.log(req.body);
   const openAIRes = await openai.images.generate({
     prompt: req.body.prompt_details,
     n: req.body.num,
-    size: "1024x1024"
+    size: req.body.size
   })
   res.status(200).json({openAIResponse: openAIRes})
 })
@@ -73,7 +74,7 @@ const postSaveImage =asyncWrapper(async(req,res)=>{
 
 const postShareImage = asyncWrapper(async(req,res)=>{
   //save the generated Image in user profile and cloudinary
-  const imageRes = Image.findByIdAndUpdate(req.body.id,{$set: {visibility:'public'}})
+  const imageRes = await Image.findByIdAndUpdate(req.body.id,{visibility:req.body.imageDetails})
   res.status(200).json({message: "image shared", response: imageRes})
 })
 

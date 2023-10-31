@@ -2,13 +2,16 @@ import { QueryClient } from '@tanstack/react-query';
 
 export const queryClient = new QueryClient();
 
+import req from './req'
+
 
 //*GET request to fetch all the public images
 export const getCommunityPosts = async({signal}) => {
-  const url = 'http://localhost:3000/api/v1/community';
-  const response = await fetch(url);
-  const resData = await response.json();
-  return resData;
+  // const url = 'http://localhost:3000/api/v1/community';
+  // const response = await fetch(url);
+  // const resData = await response.json();
+  const resData = await req.get('/community');
+  return resData.data;
 }
 
 
@@ -35,18 +38,20 @@ export const signIn = async({ query, credentials}) => {
 
 //* GET request to fetch user details for user info details
 export const getUserDetails = async({signal,id}) => {
-  const url = `http://localhost:3000/api/v1/${id}/user`;
-  const response = await fetch(url,{signal});
-  const userDetails = response.json();
-  return userDetails;
+  // const url = `http://localhost:3000/api/v1/${id}/user`;
+  // const response = await fetch(url,{signal});
+  // const userDetails = response.json();
+  const userDetailsRes = await req.get(`/${id}/user`)
+  return userDetailsRes.data;
 }
 
 //* GET request to fetch user generated images
 export const getUserImage = async({signal,id}) => {
-  const url = `http://localhost:3000/api/v1/${id}/generatedImages`;
-  const response = await fetch(url,{signal});
-  const userImages = response.json();
-  return userImages;
+  // const url = `http://localhost:3000/api/v1/${id}/generatedImages`;
+  // const response = await fetch(url,{signal});
+  // const userImages = response.json();
+  const userImageRes = await req.get(`/${id}/generatedImages`,{signal})
+  return userImageRes.data;
 }
 
 //* POST request to generate ai image
@@ -79,12 +84,13 @@ export const postSaveImage = async({id,imageDetails}) => {
 
 
 //* PATCH request to make the generated image public
-export const patchShareImage = async({id}) => {
+export const patchShareImage = async({id, imageVisibility}) => {
   const url = `http://localhost:3000/api/v1/${id}/share`;
   const response = await fetch(url,{
     method: 'PATCH',
+    body: JSON.stringify(imageVisibility),
     headers: {
-      "Content-Type": 'application/json'
+      'Content-Type': 'application/json'
     }
   });
   const res = response.json();
