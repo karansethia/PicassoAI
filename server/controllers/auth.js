@@ -60,6 +60,8 @@ const postLogin = async(req,res) => {
     {expiresIn: '1000s'}
     );
     //saving refresh token in the database to the current user
+    await User.findByIdAndUpdate(foundUser._id, { $set: { refreshToken: refreshToken } },
+      { new: true })
     // sending refresh and access tokens
     res.cookie('jwt',refreshToken,{httpOnly: true})
     res.status(200).json({accessToken});

@@ -12,7 +12,10 @@ const userSchema = new mongoose.Schema({
   generatedImages:[{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Image'
-  }]
+  }],
+  refreshToken: {
+    type: String
+  }
 });
 
 module.exports = mongoose.model('User', userSchema);
