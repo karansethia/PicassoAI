@@ -1,7 +1,7 @@
 import React, {useState, useRef} from "react";
 import p1 from "../../assets/p1.png";
-import p2 from "../../assets/p2.png";
-import p3 from "../../assets/p3.png";
+import ImgSlider from "../../Components/ImgSlider/ImgSlider";
+import SliderInput from "../../Components/SliderInput/SliderInput";
 import classes from "./PromptPanel.module.css";
 import {
   patchShareImage,
@@ -9,6 +9,7 @@ import {
   postSaveImage,
 } from "../../utils/http";
 import {useParams, useNavigate} from "react-router-dom";
+import ImageResponse from "../ImageResponse/ImageResponse";
 const DEFAULT_OPTIONS = [
   {
     name: "Brightness",
@@ -83,12 +84,57 @@ const DEFAULT_OPTIONS = [
 ];
 
 const PromptPanel = () => {
+  const [selectedOptionIndex, setSelectedOptionIndex] = useState(0);
+  const [currentImage, setCurrentImage] = useState(p1);
+  const [options, setOptions] = useState(DEFAULT_OPTIONS);
+  const selectedOption = options[selectedOptionIndex];
+  const [filteredImage, setFilteredImage] = useState({
+    src: currentImage,
+    style: {},
+  });
+
+  function handleSliderChange({target}) {
+    setOptions((prevOptions) => {
+      return prevOptions.map((option, index) => {
+        if (index !== selectedOptionIndex) return option;
+        return {...option, value: target.value};
+      });
+    });
+  }
+
+  function getImageStyle() {
+    const filters = options.map((option) => {
+      return `${option.property}(${option.value}${option.unit})`;
+    });
+
+    return {filter: filters.join(" ")};
+  }
+  const onDownload = () => {
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
+
+    const img = new Image();
+    img.setAttribute("crossorigin", "anonymous");
+    img.onload = () => {
+      canvas.width = img.width;
+      canvas.height = img.height;
+      context.filter = getImageStyle().filter;
+      context.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      // Trigger download
+      const link = document.createElement("a");
+      link.href = canvas.toDataURL("image/png");
+      link.download = "filtered-image.png";
+      link.click();
+    };
+    console.log(currentImage);
+    img.src = currentImage;
+  };
   const params = useParams();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [fetchedData, setFetchedData] = useState(null);
   const promptRef = useRef();
 
-  const [currentImage, setCurrentImage] = useState(p1);
   const onSubmitHandler = (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -99,6 +145,7 @@ const PromptPanel = () => {
       size: formData.get("size"),
     };
     console.log(prompt);
+    setIsLoading(true);
     try {
       const response = postGenerateImage({id: params.id, prompt}).then(
         (data) => {
@@ -144,18 +191,10 @@ const PromptPanel = () => {
       console.log(error);
     }
   };
-  // const onSaveHandler = (e) => {
-  //   e.preventDefault();
-  //   const imageDetails = {
-  //     imageUrl: currentImage,
-  //     prompt_details: promptRef,
-  //   };
-  //   saveImage({id: params.id, imageDetails});
-  // };
-  // const onShareHandler = (e) => {
-  //   e.preventDefault();
-  //   shareImage({id: params.id});
-  // };
+
+  const onSetImageHandler = (url) => {
+    setCurrentImage(url);
+  };
   return (
     <div>
       <div className={classes.container}>
@@ -203,39 +242,46 @@ const PromptPanel = () => {
             </div>
             <div
               style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
                 marginTop: "1.5rem",
               }}
             >
               <button type="submit">Generate</button>
-              <button onClick={() => {}}>Create variations</button>
             </div>
           </form>
+          <div>
+            <p style={{marginTop: "4rem"}}>Edit Image</p>
+            <div className={classes.sliderBtnContainer}>
+              {options.map((option, index) => {
+                return (
+                  <SliderInput
+                    key={index}
+                    name={option.name}
+                    active={index === selectedOptionIndex}
+                    handleClick={() => setSelectedOptionIndex(index)}
+                  />
+                );
+              })}
+            </div>
+            <ImgSlider
+              min={selectedOption.range.min}
+              max={selectedOption.range.max}
+              value={selectedOption.value}
+              handleChange={handleSliderChange}
+            />
+          </div>
         </div>
         <div className={classes.result_container}>
-          <div className={classes.image_container}>
-            <div className={classes.mainImage}>
-              <img src={currentImage} alt="" />
-            </div>
-            <div className={classes.variant_container}>
-              {!isLoading &&
-                fetchedData &&
-                fetchedData.map((image, index) => (
-                  <img
-                    key={index}
-                    src={image.url}
-                    alt=""
-                    onClick={() => {
-                      setCurrentImage(image.url);
-                    }}
-                  />
-                ))}
-            </div>
-          </div>
+          <ImageResponse
+            isLoading={isLoading}
+            fetchedData={fetchedData}
+            imageStyle={getImageStyle}
+            currentImage={currentImage}
+            onSet={onSetImageHandler}
+          />
           <div className={classes.actionBtnContainer}>
+            <button type="submit" onClick={onDownload}>
+              Download
+            </button>
             <button type="submit" onClick={onSaveHandler}>
               Save
             </button>
