@@ -15,8 +15,11 @@ const Navbar = () => {
           <Link to="/">Tutorial</Link>
           <Link to="/pricing">Pricing</Link>
         </ul>
-        <Link to="/signin" className={classes.button}>
-          LOGIN
+        <Link
+          to={{pathname: "/signin", search: "?type=register"}}
+          className={classes.button}
+        >
+          SIGN IN
         </Link>
       </div>
     </div>

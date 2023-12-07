@@ -36,14 +36,17 @@ const getCommunityImages = asyncWrapper(async(req,res)=>{
 })
 
 const postGenerateImage = asyncWrapper(async(req,res)=>{
-  // sent axios req to openAI, get images
   const openai = new OpenAI();
   console.log(req.body);
+  const apiReq = (promptDetails) => {}
   const openAIRes = await openai.images.generate({
     prompt: req.body.prompt_details,
     n: req.body.num,
     size: req.body.size
-  })
+  });
+  if(!openAIRes){
+    return res.status(500).json({"message":"Something went wrong please try again later"})
+  }
   res.status(200).json({openAIResponse: openAIRes})
 })
 

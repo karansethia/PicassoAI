@@ -5,11 +5,11 @@ const verifyJWT = require('../middleware/verify');
 const router = express.Router();
 
 router.get('/community', getCommunityImages);
-router.post('/:id/generate',verifyJWT,postGenerateImage);
-router.post('/:id/save',verifyJWT,postSaveImage);
-router.patch('/:id/share',verifyJWT,postShareImage);
-router.get('/:id/user',verifyJWT,getUserInfo);
-router.get('/:id/generatedImages',verifyJWT,getUserImages)
+router.post('/:id/generate',postGenerateImage);
+router.post('/:id/save',postSaveImage);
+router.patch('/:id/share',postShareImage);
+router.get('/:id/user',getUserInfo);
+router.get('/:id/generatedImages',getUserImages)
 
 
 module.exports = router;

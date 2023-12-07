@@ -1,0 +1,62 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 25rem;
+  /* margin: auto; */
+  border-radius: 1rem;
+  justify-content: center;
+  padding: 2rem 3rem;
+  background: rgba(255, 255, 255, 0.10);
+  box-shadow: 0 8px 32px 0 rgba(135, 92, 31, 0.37);
+  backdrop-filter: blur(14.5px);
+  -webkit-backdrop-filter: blur(14.5px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.container h3 {
+  font-family: var(--header-font);
+  font-size: 2rem;
+  background: linear-gradient(90deg, #D04900 6.35%, #F3B391 18.43%, #0082E1 42.93%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 1rem 0rem;
+}
+
+.container a {
+  margin: 1rem;
+  color: rgb(173, 173, 173);
+  text-align: center;
+}
+
+.form_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.form_container input {
+  color: aliceblue;
+  font-family: var(--content-font);
+  font-size: 1rem;
+  font-weight: 300;
+  margin: 0.8rem 0rem;
+  padding: 0.7rem 1rem;
+  background: none;
+  border: 0.3px solid #F3B391;
+  border-radius: 0.7rem;
+}
+
+.form_container button {
+  background: linear-gradient(90deg, #D04900 -49.44%, #002642 99.81%, #002642 99.81%);
+  border: none;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  color: antiquewhite;
+  font-family: var(--content-font);
+  margin: 1rem 0rem;
+  transition: all 0.4s ease-in;
+}
+
+.form_container button:hover {
+  transform: scale(1.03);
+}

@@ -6,9 +6,9 @@ require('dotenv').config();
 
 
 const postRegister = async(req,res)=>{
-  const {username, password} = req.body;
+  const {name, username, password} = req.body;
   console.log(req.body);
-  if(!username || !password){
+  if(!username || !password || !name){
     return res.status(400).json({"message": "Username or password not found"}) //400 => bad req
   }
   //find if user exists
@@ -20,7 +20,7 @@ const postRegister = async(req,res)=>{
         }
 
         const hashedPwd = await bcrypt.hash(password, 10); // Wait for the hashing to complete
-        const newUser = { "username": username, "password": hashedPwd };
+        const newUser = {"name": name, "username": username, "password": hashedPwd };
 
         await User.create(newUser);
 
@@ -47,8 +47,7 @@ const postLogin = async(req,res) => {
   }
   const match = await bcrypt.compare(password,foundUser.password);
   if(match){
-
-    //creating access and resfresh token
+    //creating access and refresh token
     const accessToken = jwt.sign(
       {"username": foundUser.name},
     process.env.ACCESS_TOKEN_SECRET,

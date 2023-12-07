@@ -9,7 +9,7 @@ import {
   postSaveImage,
 } from "../../utils/http";
 import {useParams, useNavigate} from "react-router-dom";
-import ImageResponse from "../ImageResponse/ImageResponse";
+import ImageResponse from "../../Components/ImageResponse/ImageResponse";
 const DEFAULT_OPTIONS = [
   {
     name: "Brightness",
