@@ -2,10 +2,16 @@ import React from "react";
 import Logo from "../../assets/PicassoAI.png";
 import classes from "./Navbar.module.css";
 import {Link} from "react-router-dom";
+import {motion} from "framer-motion";
 
 const Navbar = () => {
   return (
-    <div className={classes.container}>
+    <motion.div
+      animate={{y: -10, opacity: 1}}
+      initial={{y: -50, opacity: 0}}
+      transition={{duration: 1, type: "tween"}}
+      className={classes.container}
+    >
       <Link to="/">
         <img src={Logo} alt="PicassoAI" />
       </Link>
@@ -22,7 +28,7 @@ const Navbar = () => {
           SIGN IN
         </Link>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

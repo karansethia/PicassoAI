@@ -7,6 +7,18 @@ const Home = () => {
   return (
     <div>
       <Hero />
+      <section className={classes.swiper}>
+        <Slider />
+        <div className={classes.overlay}></div>
+      </section>
+      <section className={classes.vid}>
+        <div className={classes.video}></div>
+        <h1>
+          Turn an <span className={classes.idea}>Idea</span> to{" "}
+          <span className={classes.reality}>reality</span> with few words and
+          clicks
+        </h1>
+      </section>
       <section className={classes.info}>
         <div>
           <h3>
@@ -36,18 +48,7 @@ const Home = () => {
           </p>
         </div>
       </section>
-      <section className={classes.vid}>
-        <div className={classes.video}></div>
-        <h1>
-          Turn an <span className={classes.idea}>Idea</span> to{" "}
-          <span className={classes.reality}>reality</span> with few words and
-          clicks
-        </h1>
-      </section>
-      <section className={classes.swiper}>
-        <Slider />
-        <div className={classes.overlay}></div>
-      </section>
+
       <section className={classes.comm}>
         <h1>
           Be part of our <br />

@@ -78,6 +78,7 @@ const UserDash = () => {
         </div>
         <div className={classes.imggrid}>
           {!isPending && <ImgGrid images={images} />}
+          {images.length == 0 && <h3>No images stored</h3>}
         </div>
       </div>
     </div>

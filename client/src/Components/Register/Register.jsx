@@ -1,10 +1,11 @@
 import React from "react";
 import classes from "./Register.module.css";
 import {Link} from "react-router-dom";
+import {motion} from "framer-motion";
 
 const Register = () => {
   return (
-    <div className={classes.container}>
+    <motion.div className={classes.container}>
       <h3>Register</h3>
       <form action="" className={classes.form_container}>
         <input type="text" name="name" placeholder="Name" />
@@ -16,7 +17,7 @@ const Register = () => {
       <Link to={{pathname: "/signin", search: "?type=login"}}>
         Already have an account? Login
       </Link>
-    </div>
+    </motion.div>
   );
 };
 

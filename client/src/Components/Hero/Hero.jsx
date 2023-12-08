@@ -3,6 +3,7 @@ import classes from "./Hero.module.css";
 import Hero1 from "../../assets/hero1.png";
 import Hero2 from "../../assets/hero2.png";
 import Hero3 from "../../assets/hero3.png";
+import {motion} from "framer-motion";
 
 const Hero = () => {
   return (
@@ -18,9 +19,27 @@ const Hero = () => {
         <button>Try Now</button>
       </div>
       <div className={classes.images}>
-        <img src={Hero1} alt="" />
-        <img src={Hero2} alt="" />
-        <img src={Hero3} alt="" />
+        <motion.img
+          animate={{x: 10, opacity: 1}}
+          initial={{x: 50, opacity: 0}}
+          transition={{duration: 1, type: "tween"}}
+          src={Hero1}
+          alt=""
+        />
+        <motion.img
+          animate={{x: 10, opacity: 1}}
+          initial={{x: 50, opacity: 0}}
+          transition={{duration: 1, type: "tween", delay: 0.5}}
+          src={Hero2}
+          alt=""
+        />
+        <motion.img
+          animate={{x: 10, opacity: 1}}
+          initial={{x: 50, opacity: 0}}
+          transition={{duration: 1, type: "tween", delay: 1}}
+          src={Hero3}
+          alt=""
+        />
       </div>
     </div>
   );

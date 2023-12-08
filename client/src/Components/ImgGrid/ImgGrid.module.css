@@ -1,19 +1,20 @@
-.gridbox {
+.column {
   display: flex;
   flex-wrap: wrap;
-}
-
-.column {
-  flex: 20%;
-  max-width: 25%;
-  padding: 5px 8px;
+  margin: -1rem -1rem;
+  padding-bottom: 3rem;
 }
 
 .column img {
+  position: relative;
+  flex: 1 0 12rem;
+  margin: 1rem;
   margin-top: 8px;
   vertical-align: middle;
-  width: 100%;
+  width: 4rem;
+  aspect-ratio: 1/1;
   border-radius: 10px;
+  object-fit: cover;
 }
 
 @media (max-width: 1200px) {

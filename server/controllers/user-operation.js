@@ -11,7 +11,7 @@ const getUserImages = asyncWrapper(async(req,res) => {
   const userImages = [];
   const {generatedImages} = await User.findById(req.params.id);
   const promises = generatedImages.map((imageId) => {
-  return Image.findById(imageId)
+    return Image.findById(imageId)
     .then(image => {
       userImages.push(image);
     });
