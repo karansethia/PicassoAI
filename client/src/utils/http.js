@@ -2,7 +2,7 @@ import { QueryClient } from '@tanstack/react-query';
 
 export const queryClient = new QueryClient();
 
-import req from './req'
+import {axiosReq} from './axios'
 
 
 //*GET request to fetch all the public images
@@ -10,30 +10,26 @@ export const getCommunityPosts = async({signal}) => {
   // const url = 'http://localhost:3000/api/v1/community';
   // const response = await fetch(url);
   // const resData = await response.json();
-  const resData = await req.get('/community');
+  const resData = await axiosReq.get('/community');
   return resData.data;
 }
 
 
 //* POST request for login and auth
-export const signIn = async({ query, credentials}) => {
-  const signintype = query.signintype;
-  const url = `http://localhost:3000/api/v1/${signintype}`;
-  const response = await fetch(url,{
-    method: 'POST',
-    body: JSON.stringify(credentials),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  });
-    if (!response.ok) {
-    const error = new Error('An error occurred while creating the event');
-    error.code = response.status;
-    error.info = await response.json();
-    throw error;
-  }
-  const res = await response.json();
-  return res;
+export const postRegister = async({ name, username, password}) => {
+  const res = await axiosReq.post("/register", {
+      name,
+      username,
+      password,
+    });
+    return res;
+}
+export const postLogin = async({ username, password}) => {
+  const res = await axiosReq.post("/login", {
+      username,
+      password,
+    });
+    return res;
 }
 
 //* GET request to fetch user details for user info details
@@ -41,7 +37,7 @@ export const getUserDetails = async({signal,id}) => {
   // const url = `http://localhost:3000/api/v1/${id}/user`;
   // const response = await fetch(url,{signal});
   // const userDetails = response.json();
-  const userDetailsRes = await req.get(`/${id}/user`)
+  const userDetailsRes = await axiosReq.get(`/${id}/user`)
   return userDetailsRes.data;
 }
 
@@ -50,7 +46,7 @@ export const getUserImage = async({signal,id}) => {
   // const url = `http://localhost:3000/api/v1/${id}/generatedImages`;
   // const response = await fetch(url,{signal});
   // const userImages = response.json();
-  const userImageRes = await req.get(`/${id}/generatedImages`,{signal})
+  const userImageRes = await axiosReq.get(`/${id}/generatedImages`,{signal})
   return userImageRes.data;
 }
 

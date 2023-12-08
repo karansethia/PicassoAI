@@ -51,19 +51,19 @@ const postLogin = async(req,res) => {
     const accessToken = jwt.sign(
       {"username": foundUser.name},
     process.env.ACCESS_TOKEN_SECRET,
-    {expiresIn: '120s'}
+    {expiresIn: '12h'}
     )
     const refreshToken = jwt.sign(
       {"username": foundUser.name},
     process.env.REFRESH_TOKEN_SECRET,
-    {expiresIn: '1000s'}
+    {expiresIn: '1d'}
     );
     //saving refresh token in the database to the current user
     await User.findByIdAndUpdate(foundUser._id, { $set: { refreshToken: refreshToken } },
       { new: true })
     // sending refresh and access tokens
     res.cookie('jwt',refreshToken,{httpOnly: true})
-    res.status(200).json({accessToken});
+    res.status(200).json({foundUser,accessToken});
     }else{
         res.status(401).json({"message": "Incorrect username or password"})
     }

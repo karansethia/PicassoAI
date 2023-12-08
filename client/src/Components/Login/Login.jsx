@@ -2,15 +2,26 @@ import React from "react";
 import classes from "./Login.module.css";
 import {Link} from "react-router-dom";
 import {motion} from "framer-motion";
+import axios from "axios";
+import {axiosReq} from "../../utils/axios";
+import {postLogin} from "../../utils/http";
 
 const Login = () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(event.target);
+    const username = formData.get("username");
+    const password = formData.get("password");
+    const response = await postLogin({username, password});
+    console.log(response);
+  };
   return (
     <motion.div className={classes.container}>
       <h3>Login</h3>
-      <form action="" className={classes.form_container}>
-        <input type="email" name="email" placeholder="E-mail" />
+      <form onSubmit={handleLogin} className={classes.form_container}>
+        <input type="text" name="username" placeholder="Username" />
         <input type="password" name="password" placeholder="Password" />
-        <button>Register</button>
+        <button type="submit">Login</button>
       </form>
 
       <Link to={{pathname: "/signin", search: "?type=register"}}>
