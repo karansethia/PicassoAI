@@ -63,7 +63,7 @@ const postLogin = async(req,res) => {
       { new: true })
     // sending refresh and access tokens
     res.cookie('jwt',refreshToken,{httpOnly: true})
-    res.status(200).json({foundUser,accessToken});
+    res.status(200).json({"name":foundUser.name,"id":foundUser._id,accessToken});
     }else{
         res.status(401).json({"message": "Incorrect username or password"})
     }

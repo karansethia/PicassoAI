@@ -84,7 +84,7 @@ export const patchShareImage = async({id, imageVisibility}) => {
   const url = `http://localhost:3000/api/v1/${id}/share`;
   const response = await fetch(url,{
     method: 'PATCH',
-    body: JSON.stringify(imageVisibility),
+    body: JSON.stringify({imageVisibility}),
     headers: {
       'Content-Type': 'application/json'
     }

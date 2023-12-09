@@ -7,7 +7,7 @@ const Community = () => {
   const {data, isPending, isError, error} = useQuery({
     queryKey: ["Community"],
     queryFn: ({signal}) => getCommunityPosts({signal}),
-    staleTime: 120000,
+    staleTime: 120,
   });
   let images = [];
   if (!isPending) {

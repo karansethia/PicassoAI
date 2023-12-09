@@ -1,12 +1,14 @@
-import React from "react";
+import React, {useContext} from "react";
 import classes from "./Login.module.css";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {motion} from "framer-motion";
 import axios from "axios";
-import {axiosReq} from "../../utils/axios";
 import {postLogin} from "../../utils/http";
+import {AuthContext} from "../../Context/auth-context";
 
 const Login = () => {
+  const ctx = useContext(AuthContext);
+  const navigate = useNavigate();
   const handleLogin = async (e) => {
     e.preventDefault();
     const formData = new FormData(event.target);
@@ -14,6 +16,11 @@ const Login = () => {
     const password = formData.get("password");
     const response = await postLogin({username, password});
     console.log(response);
+    if (response.status == 200) {
+      ctx.onLogin(response.data.username, response.data.id);
+
+      navigate(`/user/${response.data.id}`);
+    }
   };
   return (
     <motion.div className={classes.container}>

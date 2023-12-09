@@ -67,17 +67,19 @@ const postSaveImage =asyncWrapper(async(req,res)=>{
     cloudinary_id: asset_id
   });
 
-
+console.log(imageRes);
   // //todo reflect the image id to user 
   // //todo query: db.users.updateOne({_id: ObjectId('6538b75879cfbf526deb5c57')},{$push:{generatedImages:{$each:['<ObjectId-of-image>]}}})
-  await User.findByIdAndUpdate(req.params.id,{$push:{generatedImages:{$each:[imageRes._id]}}},{new: true})
+  await User.findByIdAndUpdate(req.params.id,{$push:{generatedImages:{$each:[imageRes._id]}}},{new: true});
+
   res.status(200).json({cloudinary_response: cloudinaryRes, mongo_response: imageRes, message: "Sucessfully saved"})
 })
 
 
 const postShareImage = asyncWrapper(async(req,res)=>{
   //save the generated Image in user profile and cloudinary
-  const imageRes = await Image.findByIdAndUpdate(req.body.id,{visibility:req.body.imageDetails})
+  console.log(req.body);
+  const imageRes = await Image.findOneAndUpdate({userId:req.params.id},{$set:{visibility:req.body.imageVisibility}})
   res.status(200).json({message: "image shared", response: imageRes})
 })
 

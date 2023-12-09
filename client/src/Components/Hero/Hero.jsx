@@ -4,6 +4,7 @@ import Hero1 from "../../assets/hero1.png";
 import Hero2 from "../../assets/hero2.png";
 import Hero3 from "../../assets/hero3.png";
 import {motion} from "framer-motion";
+import {Link} from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -16,7 +17,9 @@ const Hero = () => {
           Create production-quality visual assets for your projects with
           unprecedented quality, speed, and style-consistency
         </p>
-        <button>Try Now</button>
+        <Link to="/signin?type=register">
+          <button>Try Now</button>
+        </Link>
       </div>
       <div className={classes.images}>
         <motion.img

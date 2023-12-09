@@ -1,10 +1,12 @@
-import React from "react";
+import React, {useContext} from "react";
 import Logo from "../../assets/PicassoAI.png";
 import classes from "./Navbar.module.css";
 import {Link} from "react-router-dom";
 import {motion} from "framer-motion";
+import {AuthContext} from "../../Context/auth-context";
 
 const Navbar = () => {
+  const ctx = useContext(AuthContext);
   return (
     <motion.div
       animate={{y: -10, opacity: 1}}
@@ -20,13 +22,26 @@ const Navbar = () => {
           <Link to="/community">Community</Link>
           <Link to="/">Tutorial</Link>
           <Link to="/pricing">Pricing</Link>
+          {ctx.isLoggedIn && <Link to={`/generate/${ctx.id}`}>Generate</Link>}
         </ul>
-        <Link
-          to={{pathname: "/signin", search: "?type=register"}}
-          className={classes.button}
-        >
-          SIGN IN
-        </Link>
+
+        {!ctx.isLoggedIn ? (
+          <Link
+            to={{pathname: "/signin", search: "?type=register"}}
+            className={classes.button}
+          >
+            SIGN IN
+          </Link>
+        ) : (
+          <button
+            className={classes.button}
+            onClick={() => {
+              ctx.onLogout();
+            }}
+          >
+            LOGOUT
+          </button>
+        )}
       </div>
     </motion.div>
   );
