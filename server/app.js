@@ -10,7 +10,10 @@ const app = express();
 
 // setting up cors for cross origin connection
 app.use(cors({
-  origin: 'https://picasso-ai-two.vercel.app/'
+  origin: 'https://picasso-ai-two.vercel.app/',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,  
+  optionsSuccessStatus: 204, 
 }));
 
 app.use(express.json())
