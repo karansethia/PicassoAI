@@ -10,7 +10,7 @@ const app = express();
 
 // setting up cors for cross origin connection
 app.use(cors({
-  origin: 'picassoai-production.up.railway.app'
+  origin: 'https://picasso-ai-two.vercel.app/'
 }));
 
 app.use(express.json())
