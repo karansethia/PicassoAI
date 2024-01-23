@@ -69,4 +69,22 @@ const postLogin = async(req,res) => {
     }
 }
 
-module.exports = {postRegister, postLogin}
+const getLogout = asyncWrapper(async(req,res)=> {
+  const cookies = req.cookies;
+
+  if(!cookies?.jwt){
+    return res.sendStatus(204); // 204 => no content to send back
+  }
+  const refreshToken = cookies.jwt;
+  const foundUser = await User.findOne({refreshToken});
+   if(!foundUser){
+    res.clearCookie('jwt', {httpOnly: true})
+    return res.status(204);
+  }
+  await User.findByIdAndUpdate({_id: foundUser._id},{refreshToken: ''});
+  res.clearCookie('jwt',{httpOnly: true});   
+    return res.sendStatus(204);
+
+})
+
+module.exports = {postRegister, postLogin, getLogout}

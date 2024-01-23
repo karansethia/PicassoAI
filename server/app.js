@@ -4,7 +4,7 @@ require('dotenv').config();
 const connectDB = require('./db/mongo')
 const userRoutes = require('./routes/user-operations');
 const authRoutes = require('./routes/auth');
-const errorHandler = require('./middleware/error-handler')
+const errorHandler = require('./middleware/error-handler');
 
 const app = express();
 

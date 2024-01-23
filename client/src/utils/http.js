@@ -35,7 +35,10 @@ export const postLogin = async({ username, password}) => {
     axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.accessToken}`
     return res;
 }
-
+export const getLogout = async() => {
+  const res = await axios.get('/logout',{},{withCredentials: true});
+  return res.data
+}
 //* GET request to fetch user details for user info details
 export const getUserDetails = async({signal,id}) => {
   // const url = `http://localhost:3000/api/v1/${id}/user`;
