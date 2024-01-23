@@ -9,17 +9,22 @@ const errorHandler = require('./middleware/error-handler');
 const app = express();
 
 // setting up cors for cross origin connection
-// const allowedOrigins = ['https://picasso-ai-two.vercel.app'];
-const corsOptions = {
-origin: 'https://picasso-ai-two.vercel.app',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-  optionsSuccessStatus: 200,
-}
+const allowedOrigins = ['https://picasso-ai-two.vercel.app'];
 
 // Enable CORS for all routes
-// app.options('*')
-app.use(cors());
+app.use(cors({
+  origin: function (origin, callback) {
+    // Check if the request origin is in the allowed origins list
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionsSuccessStatus: 204,
+}));
 
 app.use(express.json())
 

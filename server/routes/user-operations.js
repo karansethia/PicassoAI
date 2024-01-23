@@ -1,6 +1,6 @@
 const express = require('express');
 const {postGenerateImage, getCommunityImages, postSaveImage, postShareImage, getUserImages, getUserInfo} = require('../controllers/user-operation');
-import { verifyJWT } from './middleware/verify';
+// import { verifyJWT } from './middleware/verify';
 
 
 const router = express.Router();
