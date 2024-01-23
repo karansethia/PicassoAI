@@ -18,8 +18,8 @@ origin: 'https://picasso-ai-two.vercel.app',
 }
 
 // Enable CORS for all routes
-app.options('*',corsOptions)
-app.use(cors(corsOptions));
+// app.options('*')
+app.use(cors());
 
 app.use(express.json())
 
