@@ -23,16 +23,13 @@ export const postRegister = async({ name, username, password}) => {
       username,
       password,
     });
-    
     return res;
 }
 export const postLogin = async({ username, password}) => {
   const res = await axios.post("/login", {
       username,
       password,
-    },{withCredentials: true});
-    console.log(res);
-    axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.accessToken}`
+    });
     return res;
 }
 export const getLogout = async() => {
