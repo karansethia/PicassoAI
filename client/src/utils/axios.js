@@ -3,8 +3,8 @@ import axios from 'axios';
 export const axiosReq = axios.create({
   baseURL: 'https://picassoai-production.up.railway.app/api/v1'
 });
-
-axios.interceptors.response.use(res => res, async(error) => {
+axiosReq.defaults.baseURL = 'https://picassoai-production.up.railway.app/api/v1'
+axiosReq.interceptors.response.use(res => res, async(error) => {
   if(error.response.status === 401){
     const res = await axiosReq.post('/refresh',{},{withCredentials: true});
     if(res.status === 200){
@@ -14,3 +14,4 @@ axios.interceptors.response.use(res => res, async(error) => {
   }
 
 })
+

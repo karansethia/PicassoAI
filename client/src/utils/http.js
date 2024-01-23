@@ -2,7 +2,7 @@ import { QueryClient } from '@tanstack/react-query';
 
 export const queryClient = new QueryClient();
 
-// import {axiosReq} from './axios'
+import {axiosReq} from './axios'
 import axios from 'axios'
 
 
