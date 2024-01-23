@@ -11,14 +11,14 @@ export const getCommunityPosts = async({signal}) => {
   // const url = 'http://localhost:3000/api/v1/community';
   // const response = await fetch(url);
   // const resData = await response.json();
-  const resData = await axios.get('/community');
+  const resData = await axiosReq.get('/community');
   return resData.data;
 }
 
 
 //* POST request for login and auth
 export const postRegister = async({ name, username, password}) => {
-  const res = await axios.post("/register", {
+  const res = await axiosReq.post("/register", {
       name,
       username,
       password,
@@ -26,14 +26,14 @@ export const postRegister = async({ name, username, password}) => {
     return res;
 }
 export const postLogin = async({ username, password}) => {
-  const res = await axios.post("/login", {
+  const res = await axiosReq.post("/login", {
       username,
       password,
     });
     return res;
 }
 export const getLogout = async() => {
-  const res = await axios.get('/logout',{},{withCredentials: true});
+  const res = await axiosReq.get('/logout',{},{withCredentials: true});
   return res.data
 }
 //* GET request to fetch user details for user info details
@@ -41,7 +41,7 @@ export const getUserDetails = async({signal,id}) => {
   // const url = `http://localhost:3000/api/v1/${id}/user`;
   // const response = await fetch(url,{signal});
   // const userDetails = response.json();
-  const userDetailsRes = await axios.get(`/${id}/user`)
+  const userDetailsRes = await axiosReq.get(`/${id}/user`)
   return userDetailsRes.data;
 }
 
@@ -50,7 +50,7 @@ export const getUserImage = async({signal,id}) => {
   // const url = `http://localhost:3000/api/v1/${id}/generatedImages`;
   // const response = await fetch(url,{signal});
   // const userImages = response.json();
-  const userImageRes = await axios.get(`/${id}/generatedImages`,{signal})
+  const userImageRes = await axiosReq.get(`/${id}/generatedImages`,{signal})
   return userImageRes.data;
 }
 
