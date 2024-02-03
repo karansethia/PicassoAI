@@ -9,7 +9,7 @@ const errorHandler = require('./middleware/error-handler');
 const app = express();
 
 // setting up cors for cross origin connection
-const allowedOrigins = ['https://picasso-ai-two.vercel.app'];
+const allowedOrigins = ['https://picasso-ai-two.vercel.app/'];
 
 // Enable CORS for all routes
 app.use(cors({

@@ -56,43 +56,46 @@ export const getUserImage = async({signal,id}) => {
 
 //* POST request to generate ai image
 export const postGenerateImage = async({id, prompt}) => {
-  const url = `https://picassoai-production.up.railway.app/api/v1/${id}/generate`;
-  const response = await fetch(url,{
-    method: 'POST',
-    body: JSON.stringify(prompt),
-    headers: {
-      "Content-Type": 'application/json'
-    }
-  });
-  const imageDetails = response.json();
+  // const url = `https://picassoai-production.up.railway.app/api/v1/${id}/generate`;
+  // const response = await fetch(url,{
+  //   method: 'POST',
+  //   body: JSON.stringify(prompt),
+  //   headers: {
+  //     "Content-Type": 'application/json'
+  //   }
+  // });
+  // const imageDetails = response.json();
+  const imageDetails = await axiosReq.post(`/${id}/generate`,{...prompt})
   return imageDetails;
 }
 
 //*POST request to save the generated image
 export const postSaveImage = async({id,imageDetails}) => {
-  const url = `https://picassoai-production.up.railway.app/api/v1/${id}/save`;
-  const response = await fetch(url,{
-    method: 'POST',
-    body: JSON.stringify(imageDetails),
-    headers: {
-      "Content-Type": 'application/json'
-    }
-  });
-  const res = response.json();
+  // const url = `https://picassoai-production.up.railway.app/api/v1/${id}/save`;
+  // const response = await fetch(url,{
+  //   method: 'POST',
+  //   body: JSON.stringify(imageDetails),
+  //   headers: {
+  //     "Content-Type": 'application/json'
+  //   }
+  // });
+  // const res = response.json();
+  const res = await axiosReq.post(`/${id}/save`,{ ...imageDetails })
   return res;
 }
 
 
 //* PATCH request to make the generated image public
 export const patchShareImage = async({id, imageVisibility}) => {
-  const url = `https://picassoai-production.up.railway.app/api/v1/${id}/share`;
-  const response = await fetch(url,{
-    method: 'PATCH',
-    body: JSON.stringify({imageVisibility}),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  });
-  const res = response.json();
+  // const url = `https://picassoai-production.up.railway.app/api/v1/${id}/share`;
+  // const response = await fetch(url,{
+  //   method: 'PATCH',
+  //   body: JSON.stringify({imageVisibility}),
+  //   headers: {
+  //     'Content-Type': 'application/json'
+  //   }
+  // });
+  // const res = response.json();
+  const res = await axiosReq.patch(`/${id}/share`,{ imageVisibility })
   return res;
 }
