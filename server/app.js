@@ -20,7 +20,7 @@ const allowedOrigins = ['https://picasso-ai-two.vercel.app/'];
 //   },
 // Enable CORS for all routes
 app.use(cors({
-  origin: "https://picasso-ai-two.vercel.app",
+  origin: "*",
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   optionsSuccessStatus: 204,
