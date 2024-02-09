@@ -30,6 +30,7 @@ export const postLogin = async({ username, password}) => {
       username,
       password,
     });
+    console.log(res.data);
     return res;
 }
 export const getLogout = async() => {

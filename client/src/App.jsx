@@ -10,6 +10,7 @@ import UserDash, {loader as userInfoLoader} from "./Pages/User/UserDash";
 import Pricing from "./Pages/Pricing/Pricing";
 import Signin from "./Pages/Signin/Signin";
 import RootLayout from "./Components/RootLayout";
+import ProtectedRoute from "./Components/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -22,12 +23,19 @@ const router = createBrowserRouter([
       {path: "/signin", element: <Signin />},
       {
         path: "/generate/:id",
-        element: <PromptPanel />,
-        // loader: () => {} //todo add authentication before routing in this loader
+        element: (
+          <ProtectedRoute>
+            <PromptPanel />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/user/:id",
-        element: <UserDash />,
+        element: (
+          <ProtectedRoute>
+            <UserDash />
+          </ProtectedRoute>
+        ),
         loader: userInfoLoader, //todo add authentication before routing in this loader
       },
     ],

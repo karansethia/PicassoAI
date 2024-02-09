@@ -5,27 +5,28 @@ const connectDB = require('./db/mongo')
 const userRoutes = require('./routes/user-operations');
 const authRoutes = require('./routes/auth');
 const errorHandler = require('./middleware/error-handler');
+const cookieParser = require('cookie-parser')
 
 const app = express();
 
 // setting up cors for cross origin connection
-const allowedOrigins = ['https://picasso-ai-two.vercel.app/'];
-// function originCallback (origin, callback) {
-//     // Check if the request origin is in the allowed origins list
-//     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error('Not allowed by CORS'));
-//     }
-//   },
+const allowedOrigins = ["https://picasso-ai-two.vercel.app","http://localhost:5173"];
+
 // Enable CORS for all routes
 app.use(cors({
-  origin: "*",
+  origin: function (origin, callback) {
+    // Check if the request origin is in the allowed origins list
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   optionsSuccessStatus: 204,
 }));
-
+app.use(cookieParser())
 app.use(express.json())
 
 //routes

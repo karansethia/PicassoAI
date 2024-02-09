@@ -1,22 +1,22 @@
 import React, {useState} from "react";
+import {axiosReq} from "../utils/axios";
 
 export const AuthContext = React.createContext({
   isLoggedIn: false,
   username: "",
   id: null,
-  onLogin: (username) => {},
+  onLogin: (name, id, token) => {},
   onLogout: () => {},
 });
 
 const AuthContextProvider = ({children}) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [username, setUsername] = useState("");
-  const [id, setId] = useState(null);
+  const [user, setUser] = useState({name: "", id: null});
 
-  const loginHandler = (username, id) => {
+  const loginHandler = (name, id, token) => {
     setIsLoggedIn(true);
-    setUsername(username);
-    setId(id);
+    setUser({name: name, id: id});
+    axiosReq.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   };
   const logoutHandler = () => {
     setIsLoggedIn(false);
@@ -27,8 +27,8 @@ const AuthContextProvider = ({children}) => {
     <AuthContext.Provider
       value={{
         isLoggedIn: isLoggedIn,
-        username: username,
-        id: id,
+        name: user.name,
+        id: user.id,
         onLogin: loginHandler,
         onLogout: logoutHandler,
       }}

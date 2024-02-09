@@ -17,7 +17,11 @@ const Login = () => {
     const response = await postLogin({username, password});
     console.log(response);
     if (response.status == 200) {
-      ctx.onLogin(response.data.username, response.data.id);
+      ctx.onLogin(
+        response.data.username,
+        response.data.id,
+        response.data.accessToken
+      );
 
       navigate(`/user/${response.data.id}`);
     }
