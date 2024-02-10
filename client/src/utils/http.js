@@ -33,9 +33,9 @@ export const postLogin = async({ username, password}) => {
     console.log(res.data);
     return res;
 }
-export const getLogout = async() => {
-  const res = await axiosReq.get('/logout',{},{withCredentials: true});
-  return res.data
+export const postLogout = async() => {
+  const res = await axiosReq.post('/logout',{});
+  return res
 }
 //* GET request to fetch user details for user info details
 export const getUserDetails = async({signal,id}) => {

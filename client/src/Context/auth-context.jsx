@@ -20,7 +20,7 @@ const AuthContextProvider = ({children}) => {
   };
   const logoutHandler = () => {
     setIsLoggedIn(false);
-    setUsername("");
+    setUser({name: "", id: null});
   };
 
   return (

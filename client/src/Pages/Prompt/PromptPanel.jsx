@@ -169,11 +169,8 @@ const PromptPanel = () => {
       prompt_details: promptRef.current.value,
     };
     try {
-      const response = postSaveImage({id: params.id, imageDetails}).then(
-        (res) => {
-          console.log(res);
-        }
-      );
+      const response = postSaveImage({id: params.id, imageDetails});
+      //todo Notofication banner for successful operation of saving image
     } catch (error) {
       console.log(error);
     }
@@ -184,9 +181,8 @@ const PromptPanel = () => {
       const response = patchShareImage({
         id: params.id,
         imageVisibility: "public",
-      }).then((res) => {
-        console.log(res);
       });
+      //todo successfull notification banner
     } catch (error) {
       console.log(error);
     }

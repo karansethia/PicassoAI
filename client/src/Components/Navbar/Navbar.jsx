@@ -1,12 +1,23 @@
 import React, {useContext} from "react";
 import Logo from "../../assets/PicassoAI.png";
 import classes from "./Navbar.module.css";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {motion} from "framer-motion";
 import {AuthContext} from "../../Context/auth-context";
+import {postLogout} from "../../utils/http";
 
 const Navbar = () => {
   const ctx = useContext(AuthContext);
+  const navigate = useNavigate();
+  const logoutHandler = async () => {
+    const response = await postLogout();
+    console.log(response.status);
+    //todo Notification banner for successful logout
+    if (response.status === 204) {
+      ctx.onLogout();
+      navigate("/signin?type=login");
+    }
+  };
   return (
     <motion.div
       animate={{y: -10, opacity: 1}}
@@ -33,12 +44,7 @@ const Navbar = () => {
             SIGN IN
           </Link>
         ) : (
-          <button
-            className={classes.button}
-            onClick={() => {
-              ctx.onLogout();
-            }}
-          >
+          <button className={classes.button} onClick={logoutHandler}>
             LOGOUT
           </button>
         )}

@@ -69,7 +69,8 @@ const postLogin = async(req,res) => {
     }
 }
 
-const getLogout = asyncWrapper(async(req,res)=> {
+const postLogout = asyncWrapper(async(req,res)=> {
+  console.log("In the logout coontroller");
   const cookies = req.cookies;
 
   if(!cookies?.jwt){
@@ -83,8 +84,8 @@ const getLogout = asyncWrapper(async(req,res)=> {
   }
   await User.findByIdAndUpdate({_id: foundUser._id},{refreshToken: ''});
   res.clearCookie('jwt',{httpOnly: true});   
-    return res.sendStatus(204);
+  return res.sendStatus(204);
 
 })
 
-module.exports = {postRegister, postLogin, getLogout}
+module.exports = {postRegister, postLogin, postLogout}
