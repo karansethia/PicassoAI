@@ -17,6 +17,7 @@ const Login = () => {
     const response = await postLogin({username, password});
     console.log(response);
     if (response.status == 200) {
+      ctx.displayNotification("Logged in succesfully");
       ctx.onLogin(
         response.data.username,
         response.data.id,

@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;600&family=Poppins:wght@400;500&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   line-height: 1.5;
@@ -9,6 +12,8 @@
   --header-font: 'Montserrat', sans-serif;
   --content-font: 'Poppins', sans-serif;
 }
+
+
 
 html {
   font-size: 22px;

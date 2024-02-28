@@ -3,7 +3,7 @@ import Home from "./Pages/Home/Home";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import {queryClient} from "./utils/http";
 import {QueryClientProvider} from "@tanstack/react-query";
-import "./App.css";
+
 import Community from "./Pages/Community/Community";
 import PromptPanel from "./Pages/Prompt/PromptPanel";
 import UserDash, {loader as userInfoLoader} from "./Pages/User/UserDash";

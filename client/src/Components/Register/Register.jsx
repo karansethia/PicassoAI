@@ -1,11 +1,13 @@
-import React from "react";
+import React, {useContext} from "react";
 import classes from "./Register.module.css";
 import {Link, useNavigate} from "react-router-dom";
 import {motion} from "framer-motion";
 import {axiosReq} from "../../utils/axios";
 import {postRegister} from "../../utils/http";
+import {AuthContext} from "../../Context/auth-context";
 
 const Register = () => {
+  const ctx = useContext(AuthContext);
   const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -18,6 +20,7 @@ const Register = () => {
     const response = await postRegister({name, username, password});
     console.log(response.data.message);
     if (response.status === 201) {
+      ctx.displayNotification("Registered succesfully");
       navigate("/signin?type=login");
     }
   };

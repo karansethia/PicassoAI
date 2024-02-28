@@ -12,8 +12,9 @@ const Navbar = () => {
   const logoutHandler = async () => {
     const response = await postLogout();
     console.log(response.status);
-    //todo Notification banner for successful logout
+    // todo Notification banner for successful logout
     if (response.status === 204) {
+      ctx.displayNotification("Logged out succesfully");
       ctx.onLogout();
       navigate("/signin?type=login");
     }
