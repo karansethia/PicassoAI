@@ -13,6 +13,23 @@
   --content-font: 'Poppins', sans-serif;
 }
 
+@layer components {
+  .gradient {
+    background: linear-gradient(90deg,
+        #d04900 -49.44%,
+        #002642 99.81%,
+        #002642 99.81%);
+  }
+
+  .gradient-secondary {
+    background: linear-gradient(90deg,
+        #d04900 6.35%,
+        #f3b391 18.43%,
+        #0082e1 42.93%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
 
 
 html {

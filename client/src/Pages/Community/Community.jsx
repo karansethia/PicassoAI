@@ -11,7 +11,7 @@ const Community = () => {
   });
   let images = [];
   if (!isPending) {
-    data.images.map((image) => images.push(image));
+    data.images?.map((image) => images.push(image));
   }
   return (
     <div className={classes.container}>

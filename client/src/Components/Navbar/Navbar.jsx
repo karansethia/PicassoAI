@@ -1,6 +1,5 @@
 import React, {useContext} from "react";
 import Logo from "../../assets/PicassoAI.png";
-import classes from "./Navbar.module.css";
 import {Link, useNavigate} from "react-router-dom";
 import {motion} from "framer-motion";
 import {AuthContext} from "../../Context/auth-context";
@@ -24,13 +23,13 @@ const Navbar = () => {
       animate={{y: -10, opacity: 1}}
       initial={{y: -50, opacity: 0}}
       transition={{duration: 1, type: "tween"}}
-      className={classes.container}
+      className="w-full max-w-[1440px] flex items-center justify-between text-[1.2rem] font-medium sticky z-[100000] bg-[#04080fa6] px-12 py-6 top-0 font-content"
     >
       <Link to="/">
-        <img src={Logo} alt="PicassoAI" />
+        <img src={Logo} alt="PicassoAI" className="w-28 h-fit" />
       </Link>
-      <div className={classes.nav_links}>
-        <ul>
+      <div className="flex place-items-center gap-8">
+        <ul className="flex place-items-center gap-8 m-0.5">
           <Link to="/community">Community</Link>
           <Link to="/">Tutorial</Link>
           <Link to="/pricing">Pricing</Link>
@@ -40,12 +39,15 @@ const Navbar = () => {
         {!ctx.isLoggedIn ? (
           <Link
             to={{pathname: "/signin", search: "?type=register"}}
-            className={classes.button}
+            className="gradient text-white tracking-[1px] font-semibold text-base cursor-pointer m-0.5 px-8 py-2 rounded-md border-[none]"
           >
             SIGN IN
           </Link>
         ) : (
-          <button className={classes.button} onClick={logoutHandler}>
+          <button
+            className="gradient text-white tracking-[1px] font-semibold text-base cursor-pointer m-0.5 px-8 py-2 rounded-md border-[none]"
+            onClick={logoutHandler}
+          >
             LOGOUT
           </button>
         )}
