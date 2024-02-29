@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 export const axiosReq = axios.create({
-  // baseURL: 'https://picassoai-production.up.railway.app/api/v1'
-  baseURL: 'http://localhost:3000/api/v1',
+  baseURL: 'https://picasso-ai-fwks.vercel.app',
+  // baseURL: 'http://localhost:3000/api/v1',
   withCredentials: true
 });
 // axiosReq.defaults.baseURL = 'https://picassoai-production.up.railway.app/api/v1'
