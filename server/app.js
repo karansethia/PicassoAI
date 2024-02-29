@@ -11,22 +11,6 @@ const app = express();
 
 // setting up cors for cross origin connection
 // const allowedOrigins = ["https://picasso-ai-two.vercel.app","http://localhost:5173"];
-const corsOptions = {
-  origin: function (origin, callback) {
-    // Check if the origin is allowed
-    if (
-      origin === 'http://localhost:5173' ||
-      origin === 'https://picasso-ai-two.vercel.app'
-    ) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  optionsSuccessStatus: 200,
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-};
 
 // Enable CORS for all routes
 // app.use(cors({
@@ -42,9 +26,21 @@ const corsOptions = {
 //   credentials: true,
 //   optionsSuccessStatus: 204,
 // }));
-app.use(cors(corsOptions))
-app.use(cookieParser())
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://picasso-ai-two.vercel.app');
+  // You can use '*' to allow requests from all origins, but it's less secure.
+  // res.setHeader('Access-Control-Allow-Origin', '*');
+
+  // Other CORS headers you may need
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+
+  next();
+});
 app.use(express.json())
+// app.use(cors(corsOptions))
+app.use(cookieParser())
 
 //routes
 app.use('/api/v1', authRoutes);

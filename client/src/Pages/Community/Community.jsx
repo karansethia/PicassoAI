@@ -10,7 +10,7 @@ const Community = () => {
     staleTime: 120,
   });
   let images = [];
-  if (!isPending) {
+  if (!isPending && !isError) {
     data.images?.map((image) => images.push(image));
   }
   return (
@@ -20,7 +20,8 @@ const Community = () => {
         in our community
       </h1>
       <div className={classes.imggrid}>
-        {!isPending && <ImgGrid images={images} />}
+        {!isPending && !isError && <ImgGrid images={images} />}
+        {isError && error && <p>Something went wrong</p>}
       </div>
     </div>
   );
