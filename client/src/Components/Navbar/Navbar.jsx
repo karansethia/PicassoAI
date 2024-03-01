@@ -26,7 +26,7 @@ const Navbar = () => {
       className="w-full max-w-[1440px] flex items-center justify-between text-[1.2rem] font-medium sticky z-[100000] bg-[#04080fa6] px-12 py-6 top-0 font-content"
     >
       <Link to="/">
-        <img src={Logo} alt="PicassoAI" className="w-28 h-fit" />
+        <img src={Logo} alt="PicassoAI" className="w-28" />
       </Link>
       <div className="flex place-items-center gap-8">
         <ul className="flex place-items-center gap-8 m-0.5">
