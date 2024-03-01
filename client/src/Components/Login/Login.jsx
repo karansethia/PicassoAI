@@ -26,7 +26,7 @@ const Login = () => {
     }
   };
   return (
-    <motion.div className="flex flex-col m-auto w-[25rem] absolute  justify-center shadow-[0_8px_32px_0_rgba(135,92,31,0.37)] backdrop-blur-[14.5px] border px-12 py-8 rounded-2xl border-solid border-[rgba(255,255,255,0.18)] left-0 top-0 bg-[#ffffff1a]">
+    <motion.div className="flex flex-col w-[25rem] absolute translate-x-[130%] translate-y-36 justify-center shadow-[0_8px_32px_0_rgba(135,92,31,0.37)] backdrop-blur-[14.5px] border px-12 py-8 rounded-2xl border-solid border-[rgba(255,255,255,0.18)] left-0 top-0 bg-[#ffffff1a]">
       <h3 className="text-[2.5rem] font-semibold bg-clip-text mx-0 my-4 font-header gradient-secondary">
         Login
       </h3>

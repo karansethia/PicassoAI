@@ -9,7 +9,7 @@ const Signin = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const type = searchParams.get("type");
   return (
-    <div className={classes.container}>
+    <div className="h-[70vh] w-full flex justify-center items-center">
       <AnimatePresence mode="wait">
         {type == "register" && (
           <motion.div

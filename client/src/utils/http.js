@@ -11,7 +11,7 @@ export const getCommunityPosts = async({signal}) => {
   // const url = 'http://localhost:3000/api/v1/community';
   // const response = await fetch(url);
   // const resData = await response.json();
-  const resData = await axiosReq.get('/api/community');
+  const resData = await axiosReq.get('/community');
   return resData.data;
 }
 
