@@ -10,9 +10,9 @@
     {
       "src": "/(.*)",
       "dest": "/",
-      "methods": ["GET", "PUT", "POST", "DELETE", "PATCH", "OPTIONS"],
+      "methods": ["GET", "PUT", "POST", "DELETE", "PATCH", "OPTIONS", "HEAD"],
       "headers": {
-        "Access-Control-Allow-Origin": "https://picasso-ai-two.vercel.app",
+        "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Credentials": "true"
       }
     }
