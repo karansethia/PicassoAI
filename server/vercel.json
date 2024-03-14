@@ -12,7 +12,8 @@
       "dest": "/",
       "methods": ["GET", "PUT", "POST", "DELETE", "PATCH", "OPTIONS"],
       "headers": {
-        "Access-Control-Allow-Origin": "https://picasso-ai-two.vercel.app"
+        "Access-Control-Allow-Origin": "https://picasso-ai-two.vercel.app",
+        "Acces-Control-Allow-Credential": true
       }
     }
   ]
