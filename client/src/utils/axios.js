@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const axiosReq = axios.create({
-  baseURL: 'https://picasso-ai-fwks.vercel.app',
+  baseURL: 'https://picasso-ai-fwks.vercel.app/api/v1',
   // baseURL: 'http://localhost:3000/api/v1',
   withCredentials: true
 });
