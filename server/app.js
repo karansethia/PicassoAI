@@ -11,19 +11,20 @@ const app = express();
 
 // Enable CORS for all routes
 const allowedOrigins = ["https://picasso-ai-two.vercel.app","http://localhost:5173"];
-app.use(cors({
-  origin: function (origin, callback) {
-    // Check if the request origin is in the allowed origins list
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-  optionsSuccessStatus: 204,
-}));
+// app.use(cors({
+//   origin: function (origin, callback) {
+//     // Check if the request origin is in the allowed origins list
+//     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   },
+//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//   credentials: true,
+//   optionsSuccessStatus: 204,
+// }));
+app.use(cors())
 
 
 app.use(express.json())

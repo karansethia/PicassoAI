@@ -20,5 +20,7 @@
     "titleBar.inactiveForeground": "#e7e7e799"
   },
   "peacock.color": "#007fff",
-  "audioCues.save": "always"
+  "accessibility.signals.save": {
+    "sound": "always"
+  }
 }
