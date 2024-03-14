@@ -10,7 +10,7 @@ const cookieParser = require('cookie-parser')
 const app = express();
 
 // Enable CORS for all routes
-const allowedOrigins = ["https://picasso-ai-two.vercel.app","http://localhost:5173"];
+const allowedOrigins = ["https://picasso-ai-two.vercel.app"];
 app.use(cors({
   origin: function (origin, callback) {
     // Check if the request origin is in the allowed origins list
